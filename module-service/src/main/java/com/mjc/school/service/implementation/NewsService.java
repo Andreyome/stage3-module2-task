@@ -1,7 +1,6 @@
 package com.mjc.school.service.implementation;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.implementation.NewsRepository;
 import com.mjc.school.repository.model.impl.NewsModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDtoRequest;
@@ -18,22 +17,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
-    private final BaseRepository<NewsModel, Long> newsModelRepository;
+    private final BaseRepository<NewsModel, Long> newsRepository;
 
     @Autowired
     public NewsService(BaseRepository<NewsModel, Long> newsModelRepository) {
-        this.newsModelRepository = newsModelRepository;
+        this.newsRepository = newsModelRepository;
     }
 
 
     @Override
     public List<NewsDtoResponse> readAll() {
-        return newsModelRepository.readAll().stream().map(NewsMapper.INSTANCE::newsToDto).collect(Collectors.toList());
+        return newsRepository.readAll().stream().map(NewsMapper.INSTANCE::newsToDto).collect(Collectors.toList());
     }
 
     @Override
     public NewsDtoResponse readById(Long id) {
-        Optional<NewsModel> newsModelOptional = newsModelRepository.readById(id);
+        Optional<NewsModel> newsModelOptional = newsRepository.readById(id);
         if (newsModelOptional.isPresent()) {
             return NewsMapper.INSTANCE.newsToDto(newsModelOptional.get());
         } else throw new RuntimeException("No news with such id found");
@@ -45,7 +44,7 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
         NewsModel newsModel = NewsMapper.INSTANCE.newsDtoToModel(createRequest);
         newsModel.setCreateDate(LocalDateTime.now());
         newsModel.setLastUpdateDate(LocalDateTime.now());
-        newsModelRepository.create(newsModel);
+        newsRepository.create(newsModel);
         return NewsMapper.INSTANCE.newsToDto(newsModel);
     }
 
@@ -54,13 +53,13 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     public NewsDtoResponse update(NewsDtoRequest updateRequest) {
         NewsModel updatedNews = NewsMapper.INSTANCE.newsDtoToModel(updateRequest);
         updatedNews.setLastUpdateDate(LocalDateTime.now());
-        updatedNews.setCreateDate(newsModelRepository.readById(updatedNews.getId()).get().getCreateDate());
-        return NewsMapper.INSTANCE.newsToDto(newsModelRepository.update(updatedNews));
+        updatedNews.setCreateDate(newsRepository.readById(updatedNews.getId()).get().getCreateDate());
+        return NewsMapper.INSTANCE.newsToDto(newsRepository.update(updatedNews));
     }
 
     @Override
     public boolean deleteById(Long id) {
-        if (!newsModelRepository.deleteById(id)) {
+        if (!newsRepository.deleteById(id)) {
             throw new RuntimeException("News with provided id not found.");
         }
         return true;

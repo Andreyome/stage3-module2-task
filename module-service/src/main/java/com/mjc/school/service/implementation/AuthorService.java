@@ -21,8 +21,8 @@ import java.util.Optional;
 public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> {
     private final BaseRepository<AuthorModel, Long> authorRepository;
     @Autowired
-    public AuthorService(BaseRepository<AuthorModel, Long> repository){
-        this.authorRepository = repository;
+    public AuthorService(BaseRepository<AuthorModel, Long> authorRepository){
+        this.authorRepository = authorRepository;
     }
 
     @Override

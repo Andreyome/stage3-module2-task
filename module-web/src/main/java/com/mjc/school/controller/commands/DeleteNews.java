@@ -8,23 +8,25 @@ import com.mjc.school.service.dto.NewsDtoResponse;
 
 import java.util.Scanner;
 
-public class DeleteNews implements BaseCommand{
-    BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController;
+public class DeleteNews implements BaseCommand {
+    BaseController<NewsDtoRequest, NewsDtoResponse, Long> newsController;
     Scanner scanner;
-    public DeleteNews(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController, Scanner scanner){
+
+    public DeleteNews(BaseController<NewsDtoRequest, NewsDtoResponse, Long> newsController) {
         this.newsController = newsController;
-        this.scanner = scanner;
     }
+
     @Override
     public void execute() {
         System.out.println("Write News id:");
         boolean isTrue = false;
         while (!isTrue) {
+
             try {
-                System.out.println(newsController.deleteById(scanner.nextLong()-1));
+                Scanner scanner = new Scanner(System.in);
+                System.out.println(newsController.deleteById(scanner.nextLong() - 1));
                 isTrue = true;
-            }
-            catch (ValidationException e){
+            } catch (ValidationException e) {
                 throw new ValidationException("News id is invalid");
             }
         }

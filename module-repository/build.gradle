@@ -1,4 +1,6 @@
 dependencies {
-    implementation group: 'org.springframework', name: 'spring-aop', version: '5.3.18'
-    implementation 'org.aspectj:aspectjweaver:1.9.19'
+    implementation 'org.projectlombok:lombok:1.18.26'
+    implementation 'org.projectlombok:lombok:1.18.26'
+    implementation 'org.springframework:spring-aspects:6.0.11'
+    implementation 'com.github.shalousun:datasource-aspect:0.1'
 }

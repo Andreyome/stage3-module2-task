@@ -10,23 +10,22 @@ import java.util.Scanner;
 
 public class CreateNews implements BaseCommand{
     BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController;
-    Scanner scanner;
-    public CreateNews(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController, Scanner scanner){
+    public CreateNews(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController){
         this.newsController = newsController;
-        this.scanner = scanner;
     }
     @Override
     public void execute() {
         boolean isTrue = false;
         while (!isTrue) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write News title:");
                 String tmpTitle = scanner.nextLine();
                 System.out.println("Write News content:");
                 String tmpContent = scanner.nextLine();
                 System.out.println("Write News author id:");
                 Long tmpAuthor = scanner.nextLong();
-                System.out.println(newsController.create(new NewsDtoRequest(NewsController.getLastNewsId()+1,tmpTitle,tmpContent,tmpAuthor)));
+                System.out.println(newsController.create(new NewsDtoRequest((long)(newsController.readAll().size()+1),tmpTitle,tmpContent,tmpAuthor)));
                 NewsController.setLastNewsId(NewsController.getLastNewsId()+1L);
                 isTrue = true;
             }

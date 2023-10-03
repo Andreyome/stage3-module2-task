@@ -11,9 +11,8 @@ import java.util.Scanner;
 public class GetAuthorById implements BaseCommand{
     BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController;
     Scanner scanner;
-    public GetAuthorById(BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController,Scanner scanner){
+    public GetAuthorById(BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController){
         this.authorController = authorController;
-        this.scanner = scanner;
     }
     @Override
     public void execute() {
@@ -21,6 +20,7 @@ public class GetAuthorById implements BaseCommand{
         boolean isTrue = false;
         while (!isTrue) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println(authorController.readById(scanner.nextLong()));
                 isTrue = true;
             }

@@ -12,15 +12,15 @@ import java.util.Scanner;
 public class UpdateAuthor implements BaseCommand{
     BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController;
     Scanner scanner;
-    public UpdateAuthor(BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController, Scanner scanner){
+    public UpdateAuthor(BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController){
         this.authorController = authorController;
-        this.scanner = scanner;
     }
     @Override
     public void execute() {
         boolean isTrue = false;
         while (!isTrue) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write author id:");
                 Long id = Long.parseLong(scanner.nextLine());
                 System.out.println(authorController.readById(id).toString());

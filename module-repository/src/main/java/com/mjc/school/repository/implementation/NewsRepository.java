@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
-    private final DataSource dataSource;
+    private DataSource dataSource;
 
     @Autowired
     public NewsRepository(DataSource dataSource) {
@@ -43,7 +43,8 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public boolean deleteById(Long id) {
-        return dataSource.getNewsModels().remove(dataSource.getNewsModels().get(id.intValue()-1));
+        NewsModel newsToDelete = dataSource.getNewsModels().stream().filter(newsModel -> newsModel.getId().equals(id)).findAny().orElseThrow();
+        return dataSource.getNewsModels().remove(newsToDelete);
     }
 
     @Override

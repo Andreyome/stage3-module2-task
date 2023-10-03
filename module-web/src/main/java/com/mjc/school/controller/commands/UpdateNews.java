@@ -11,15 +11,15 @@ import java.util.Scanner;
 public class UpdateNews implements BaseCommand{
     BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController;
     Scanner scanner;
-    public UpdateNews(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController, Scanner scanner){
+    public UpdateNews(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController){
         this.newsController = newsController;
-        this.scanner = scanner;
     }
     @Override
     public void execute() {
         boolean isTrue = false;
         while (!isTrue) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println("Write News id:");
                 Long id =Long.parseLong( scanner.nextLine());
                 System.out.println(newsController.readById(id));

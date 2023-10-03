@@ -13,9 +13,8 @@ import java.util.Scanner;
 public class GetNewsById implements BaseCommand{
     BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController;
     Scanner scanner;
-    public GetNewsById(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController,Scanner scanner){
+    public GetNewsById(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController){
         this.newsController = newsController;
-        this.scanner = scanner;
     }
     @Override
     public void execute() {
@@ -23,6 +22,7 @@ public class GetNewsById implements BaseCommand{
         boolean isTrue = false;
         while (!isTrue) {
             try {
+                Scanner scanner = new Scanner(System.in);
                 System.out.println(newsController.readById(scanner.nextLong()));
                 isTrue = true;
             }
