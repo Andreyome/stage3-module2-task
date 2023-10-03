@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class DeleteAuthor implements BaseCommand {
     BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController;
-    Scanner scanner;
 
     public DeleteAuthor(BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController) {
         this.authorController = authorController;

@@ -20,8 +20,8 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     private final BaseRepository<NewsModel, Long> newsRepository;
 
     @Autowired
-    public NewsService(BaseRepository<NewsModel, Long> newsModelRepository) {
-        this.newsRepository = newsModelRepository;
+    public NewsService(BaseRepository<NewsModel, Long> newsRepository) {
+        this.newsRepository = newsRepository;
     }
 
 
@@ -59,9 +59,6 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 
     @Override
     public boolean deleteById(Long id) {
-        if (!newsRepository.deleteById(id)) {
-            throw new RuntimeException("News with provided id not found.");
-        }
-        return true;
+        return newsRepository.deleteById(id);
     }
 }

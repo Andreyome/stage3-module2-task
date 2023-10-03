@@ -14,12 +14,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+
 @Component
 @Controller
-public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> {
-    BaseService<AuthorDtoRequest,AuthorDtoResponse,Long> authorService;
+public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> {
+    BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> authorService;
+
     @Autowired
-    public AuthorController(BaseService<AuthorDtoRequest,AuthorDtoResponse,Long> authorService){
+    public AuthorController(BaseService<AuthorDtoRequest, AuthorDtoResponse, Long> authorService) {
         this.authorService = authorService;
     }
 
@@ -31,7 +33,7 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
 
     @Override
     @CommandHandler(value = "getAuthorById")
-    public AuthorDtoResponse readById(@CommandParam("authorId")Long id) {
+    public AuthorDtoResponse readById(@CommandParam("authorId") Long id) {
         return authorService.readById(id);
     }
 
@@ -49,7 +51,7 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
 
     @Override
     @CommandHandler(value = "deleteAuthorById")
-    public boolean deleteById(@CommandParam("authorId")Long id) {
+    public boolean deleteById(@CommandParam("authorId") Long id) {
         return authorService.deleteById(id);
     }
 }

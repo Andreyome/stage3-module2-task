@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;
 
-public class GetAllAuthors implements BaseCommand{
-    BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController;
-    public GetAllAuthors(BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController){
+public class GetAllAuthors implements BaseCommand {
+    BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController;
+
+    public GetAllAuthors(BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController) {
         this.authorController = authorController;
     }
+
     @Override
     public void execute() {
         authorController.readAll().forEach(System.out::println);

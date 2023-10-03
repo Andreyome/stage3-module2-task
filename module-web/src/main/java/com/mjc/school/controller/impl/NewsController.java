@@ -13,16 +13,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+
 @Component
 @Controller
 public class NewsController implements BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
     private final BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService;
-    private static Long lastNewsId;
 
     @Autowired
     public NewsController(BaseService<NewsDtoRequest, NewsDtoResponse, Long> newsService) {
         this.newsService = newsService;
-        lastNewsId = (long)newsService.readAll().size();
     }
 
     @Override
@@ -33,7 +32,7 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
 
     @Override
     @CommandHandler(value = "GetNewsById")
-    public NewsDtoResponse readById(@CommandParam("newsId")Long id) {
+    public NewsDtoResponse readById(@CommandParam("newsId") Long id) {
         return newsService.readById(id);
     }
 
@@ -51,14 +50,7 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
 
     @Override
     @CommandHandler(value = "deleteNews")
-    public boolean deleteById(@CommandParam("newsId")Long id) {
+    public boolean deleteById(@CommandParam("newsId") Long id) {
         return newsService.deleteById(id);
-    }
-
-    public static Long getLastNewsId() {
-        return lastNewsId;
-    }
-
-    public static void setLastNewsId(Long providedLastNewsId) {
     }
 }

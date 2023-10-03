@@ -43,7 +43,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public boolean deleteById(Long id) {
-        NewsModel newsToDelete = dataSource.getNewsModels().stream().filter(newsModel -> newsModel.getId().equals(id)).findAny().orElseThrow();
+        NewsModel newsToDelete = dataSource.getNewsModels().stream().filter(newsModel -> newsModel.getId().equals(id)).findAny().get();
         return dataSource.getNewsModels().remove(newsToDelete);
     }
 

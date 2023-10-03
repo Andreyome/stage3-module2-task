@@ -7,11 +7,13 @@ import com.mjc.school.service.dto.NewsDtoResponse;
 
 import java.util.Scanner;
 
-public class GetAllNews implements BaseCommand{
-    BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController;
-    public GetAllNews(BaseController<NewsDtoRequest, NewsDtoResponse,Long>  newsController){
+public class GetAllNews implements BaseCommand {
+    BaseController<NewsDtoRequest, NewsDtoResponse, Long> newsController;
+
+    public GetAllNews(BaseController<NewsDtoRequest, NewsDtoResponse, Long> newsController) {
         this.newsController = newsController;
     }
+
     @Override
     public void execute() {
         newsController.readAll().forEach(System.out::println);

@@ -9,10 +9,6 @@ public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         ControllerCommands commands = context.getBean(ControllerCommands.class);
-
-        while (true) {
-            commands.printMenu();
             commands.execute();
-        }
     }
 }

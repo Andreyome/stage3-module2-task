@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class CreateAuthor implements BaseCommand {
     BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController;
-    Scanner scanner;
 
     public CreateAuthor(BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController) {
         this.authorController = authorController;

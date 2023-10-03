@@ -26,7 +26,6 @@ public class CreateNews implements BaseCommand{
                 System.out.println("Write News author id:");
                 Long tmpAuthor = scanner.nextLong();
                 System.out.println(newsController.create(new NewsDtoRequest((long)(newsController.readAll().size()+1),tmpTitle,tmpContent,tmpAuthor)));
-                NewsController.setLastNewsId(NewsController.getLastNewsId()+1L);
                 isTrue = true;
             }
             catch (ValidationException e){

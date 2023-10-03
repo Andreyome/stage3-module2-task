@@ -10,12 +10,13 @@ import com.mjc.school.service.dto.NewsDtoResponse;
 
 import java.util.Scanner;
 
-public class GetNewsById implements BaseCommand{
-    BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController;
-    Scanner scanner;
-    public GetNewsById(BaseController<NewsDtoRequest, NewsDtoResponse,Long> newsController){
+public class GetNewsById implements BaseCommand {
+    BaseController<NewsDtoRequest, NewsDtoResponse, Long> newsController;
+
+    public GetNewsById(BaseController<NewsDtoRequest, NewsDtoResponse, Long> newsController) {
         this.newsController = newsController;
     }
+
     @Override
     public void execute() {
         System.out.println("Write News id:");
@@ -25,8 +26,7 @@ public class GetNewsById implements BaseCommand{
                 Scanner scanner = new Scanner(System.in);
                 System.out.println(newsController.readById(scanner.nextLong()));
                 isTrue = true;
-            }
-            catch (ValidationException e){
+            } catch (ValidationException e) {
                 throw new ValidationException("News id is invalid");
             }
         }

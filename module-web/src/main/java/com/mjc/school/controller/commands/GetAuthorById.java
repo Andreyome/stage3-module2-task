@@ -8,12 +8,13 @@ import com.mjc.school.service.dto.AuthorDtoResponse;
 
 import java.util.Scanner;
 
-public class GetAuthorById implements BaseCommand{
-    BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController;
-    Scanner scanner;
-    public GetAuthorById(BaseController<AuthorDtoRequest, AuthorDtoResponse,Long> authorController){
+public class GetAuthorById implements BaseCommand {
+    BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController;
+
+    public GetAuthorById(BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> authorController) {
         this.authorController = authorController;
     }
+
     @Override
     public void execute() {
         System.out.println("Write Author id:");
@@ -23,8 +24,7 @@ public class GetAuthorById implements BaseCommand{
                 Scanner scanner = new Scanner(System.in);
                 System.out.println(authorController.readById(scanner.nextLong()));
                 isTrue = true;
-            }
-            catch (ValidationException e){
+            } catch (ValidationException e) {
                 throw new ValidationException("Author id is invalid");
             }
         }
